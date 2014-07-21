@@ -3,14 +3,18 @@
 #load the train data
 trainData <- read.table("train/X_train.txt")
 
-#load the traind data labels
+#load the train data labels
 trainDataLabels <- read.table("train/y_train.txt")
+
+#load the train subjects
+trainSubjects <- read.table("train/subject_train.txt")
+colnames(trainSubjects) <- c("Subject")
 
 #give a descriptive name to labels
 colnames(trainDataLabels) <- c("Activity")
 
 #label the traindata
-labelledTrainData <- cbind(trainDataLabels,trainData)
+labelledTrainData <- cbind(trainDataLabels,trainSubjects, trainData)
 
 #load the test data
 testData <- read.table("test/X_test.txt")
@@ -18,11 +22,16 @@ testData <- read.table("test/X_test.txt")
 #load the test data labels
 testDataLabels <- read.table("test/y_test.txt")
 
+
+#load the test subjects
+testSubjects <- read.table("test/subject_test.txt")
+colnames(testSubjects) <- c("Subject")
+
 #give a descriptive name to labels
 colnames(testDataLabels) <- c("Activity")
 
 #label the traindata
-labelledTestData <- cbind(testDataLabels,testData)
+labelledTestData <- cbind(testDataLabels,testSubjects, testData)
 
 #merge the two data sets into one
 mergedActivityDataSet <- rbind(labelledTrainData, labelledTestData)
@@ -30,13 +39,15 @@ mergedActivityDataSet <- rbind(labelledTrainData, labelledTestData)
 ##end of first part
 
 ##second part: extract the measurements for mean and standard deviation
+##this takes part of the fourth part, since we are giving the descriptive names (features)
+##which are also required for part four of this assignment
 
 #labeling all the variables
 ##first we load the features
 features <- read.table("features.txt", colClasses="character")
 
 #change the column names for the mergedActivityDataSet to codified descriptive names from features
-colnames(mergedActivityDataSet) <- c("Activity", features$V2)
+colnames(mergedActivityDataSet) <- c("Activity", "Subject", features$V2)
 
 ##extract features that record mean
 meanFeatures <- grep("mean",features$V2, value=T, ignore.case=T)
@@ -45,7 +56,7 @@ meanFeatures <- grep("mean",features$V2, value=T, ignore.case=T)
 stdFeatures <- grep("std",features$V2, value=T, ignore.case=T)
 
 ##combine the column/variable names we need from the merged data
-allFeatures <- c("Activity", meanFeatures, stdFeatures)
+allFeatures <- c("Activity", "Subject", meanFeatures, stdFeatures)
 
 #Extracting only the measurements on the mean and standard deviation for each measurement.
 meanSTDActivityDataSet <- mergedActivityDataSet[, allFeatures ]
@@ -67,7 +78,22 @@ for(i in counter){
   meanSTDActivityDataSet$Activity[i] <- activity_labels[meanSTDActivityDataSet$Activity[i],2]
   i <- i+1 #increment the counter
 }
-meanSTDActivityDataSet
-
-
+##after here: meanSTDActivityDataSet has both descriptive activity names and descriptive variable names.
+##the definitions for the variables will be in the codebook
 #end of third part
+
+##part five: Creating an independent tidy data set with the average of each variable for each activity and each subject.
+#coalesce all the rows into the 6 distinctive activities
+#for tidy data: variables are unique (which already are, observations are unique, need to bring these to six)
+#extract data for each of the activities as separate data frames
+
+headers <- allFeatures[2:length(allFeatures)]
+##wide is tidy
+tidyActivityMeanSTDData <- aggregate(meanSTDActivityDataSet[,headers], 
+                                     by=list(meanSTDActivityDataSet$Subject,meanSTDActivityDataSet$Activity),
+                                     data=meanSTDActivityDataSet, 
+                                     FUN=mean)
+#rename column names
+colnames(tidyActivityMeanSTDData) <- allFeatures
+#write the data
+write.table(tidyActivityMeanSTDData,file="tidyActivityData.txt", sep=",")
