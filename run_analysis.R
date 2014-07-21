@@ -35,8 +35,9 @@ mergedActivityDataSet <- rbind(labelledTrainData, labelledTestData)
 ##first we load the features
 features <- read.table("features.txt", colClasses="character")
 
-#change the column names for the mergedActivityDataSet to codified descriptive
+#change the column names for the mergedActivityDataSet to codified descriptive names from features
 colnames(mergedActivityDataSet) <- c("Activity", features$V2)
+
 ##extract features that record mean
 meanFeatures <- grep("mean",features$V2, value=T, ignore.case=T)
 
