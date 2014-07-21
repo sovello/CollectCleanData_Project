@@ -25,7 +25,7 @@ colnames(testDataLabels) <- c("Activity")
 labelledTestData <- cbind(testDataLabels,testData)
 
 #merge the two data sets into one
-mergedActivityDataSet <- rbind(labelledTrainData, labelledTestdata)
+mergedActivityDataSet <- rbind(labelledTrainData, labelledTestData)
 
 ##end of first part
 
@@ -35,17 +35,19 @@ mergedActivityDataSet <- rbind(labelledTrainData, labelledTestdata)
 ##first we load the features
 features <- read.table("features.txt", colClasses="character")
 
+#change the column names for the mergedActivityDataSet to codified descriptive
+colnames(mergedActivityDataSet) <- c("Activity", features$V2)
 ##extract features that record mean
-meanFeatures <- grep("mean",measurements$V2, value=T, ignore.case=T)
+meanFeatures <- grep("mean",features$V2, value=T, ignore.case=T)
 
 ##extract features that record standard deviation
-stdFeatures <- grep("std",measurements$V2, value=T, ignore.case=T)
+stdFeatures <- grep("std",features$V2, value=T, ignore.case=T)
 
 ##combine the column/variable names we need from the merged data
 allFeatures <- c("Activity", meanFeatures, stdFeatures)
 
 #Extracting only the measurements on the mean and standard deviation for each measurement.
-meanSTDActivityDataSet <- mergedActivityDataSet[ allFeatures ]
+meanSTDActivityDataSet <- mergedActivityDataSet[, allFeatures ]
 
 ##end of second part
 
