@@ -87,13 +87,24 @@ for(i in counter){
 #for tidy data: variables are unique (which already are, observations are unique, need to bring these to six)
 #extract data for each of the activities as separate data frames
 
-headers <- allFeatures[2:length(allFeatures)]
+headers <- allFeatures[3:length(allFeatures)]
 ##wide is tidy
 tidyActivityMeanSTDData <- aggregate(meanSTDActivityDataSet[,headers], 
                                      by=list(meanSTDActivityDataSet$Subject,meanSTDActivityDataSet$Activity),
                                      data=meanSTDActivityDataSet, 
                                      FUN=mean)
+
+##let's format the variable names:
+tidyHeaders <- c()
+for(header in allFeatures){
+  nobracket <- gsub("[()]", "", header)
+  nobodybody <- gsub("BodyBody","Body", nobracket)
+  nodash <- gsub("-","_",nobodybody)
+  not <- gsub("^t","time_",nodash)
+  nof <- gsub("^f","frequency_",not)
+  tidyHeaders <- c(tidyHeaders, nof)
+}
 #rename column names
-colnames(tidyActivityMeanSTDData) <- allFeatures
+colnames(tidyActivityMeanSTDData) <- tidyHeaders
 #write the data
 write.table(tidyActivityMeanSTDData,file="tidyActivityData.txt", sep=",")
