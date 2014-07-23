@@ -20,5 +20,11 @@ such as frequency.
 - The final cleaned data set is saved with the name *tidyActivityData.txt*
 
 - The final cleaned data contains data about the for each observations per activity and the subject (the person who recorded this)
- 
+
+### Standards adopted in cleaning the data
+1. All the '()' have been removed
+2. All the hyphens have been replaced with an underscore
+3. The preceding t and f have been replaced with time and frequency respectively
+4. The double 'BodyBody' text has been replaced with a single Body
+
 The codebook for the cleaned data is provided along with the script.
