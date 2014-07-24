@@ -7,94 +7,84 @@ This data is saved in a text file with a csv format. So, any spreadsheet process
 **There are currently 88 variables being reported in this data set**
 Since these data (including the calculated variables) are centered certain manually measured variables, then a 
 general definition is provided here for some of the variables to make it easy when you go through.
-## General variables
 
-##Specific
-1. **Activity**: This is the activity that was recorded for each volunteer
-2. **Subject**: This is an identifier for the volunteer
-3. **time_BodyAcc_mean_X**
-4. **time_BodyAcc_mean_Y**
-5. **time_BodyAcc_mean_Z**
-6. **time_GravityAcc_mean_X**
-7. **time_GravityAcc_mean_Y**
-8. **time_GravityAcc_mean_Z**
-9. **time_BodyAccJerk_mean_X**
-10. **time_BodyAccJerk_mean_Y**
-11. **time_BodyAccJerk_mean_Z**
-12. **time_BodyGyro_mean_X**
-13. **time_BodyGyro_mean_Y**
-14. **time_BodyGyro_mean_Z**
-15. **time_BodyGyroJerk_mean_X**
-16. **time_BodyGyroJerk_mean_Y**
-17. **time_BodyGyroJerk_mean_Z**
-18. **time_BodyAccMag_mean**
-19. **time_GravityAccMag_mean**
-20. **time_BodyAccJerkMag_mean**
-21. **time_BodyGyroMag_mean**
-22. **time_BodyGyroJerkMag_mean**
-23. **frequency_BodyAcc_mean_X**
-24. **frequency_BodyAcc_mean_Y**
-25. **frequency_BodyAcc_mean_Z**
-26. **frequency_BodyAcc_meanFreq_X**
-27. **frequency_BodyAcc_meanFreq_Y**
-28. **frequency_BodyAcc_meanFreq_Z**
-29. **frequency_BodyAccJerk_mean_X**
-30. **frequency_BodyAccJerk_mean_Y**
-31. **frequency_BodyAccJerk_mean_Z**
-32. **frequency_BodyAccJerk_meanFreq_X**
-33. **frequency_BodyAccJerk_meanFreq_Y**
-34. **frequency_BodyAccJerk_meanFreq_Z**
-35. **frequency_BodyGyro_mean_X**
-36. **frequency_BodyGyro_mean_Y**
-37. **frequency_BodyGyro_mean_Z**
-38. **frequency_BodyGyro_meanFreq_X**
-39. **frequency_BodyGyro_meanFreq_Y**
-40. **frequency_BodyGyro_meanFreq_Z**
-41. **frequency_BodyAccMag_mean**
-42. **frequency_BodyAccMag_meanFreq**
-43. **frequency_BodyAccJerkMag_mean**
-44. **frequency_BodyAccJerkMag_meanFreq**
-45. **frequency_BodyGyroMag_mean**
-46. **frequency_BodyGyroMag_meanFreq**
-47. **frequency_BodyGyroJerkMag_mean**
-48. **frequency_BodyGyroJerkMag_meanFreq**
-49. **angletBodyAccMean,gravity**
-50. **angletBodyAccJerkMean,gravityMean**
-51. **angletBodyGyroMean,gravityMean**
-52. **angletBodyGyroJerkMean,gravityMean**
-53. **angleX,gravityMean**
-54. **angleY,gravityMean**
-55. **angleZ,gravityMean**
-56. **time_BodyAcc_std_X**
-57. **time_BodyAcc_std_Y**
-58. **time_BodyAcc_std_Z**
-59. **time_GravityAcc_std_X**
-60. **time_GravityAcc_std_Y**
-61. **time_GravityAcc_std_Z**
-62. **time_BodyAccJerk_std_X**
-63. **time_BodyAccJerk_std_Y**
-64. **time_BodyAccJerk_std_Z**
-65. **time_BodyGyro_std_X**
-66. **time_BodyGyro_std_Y**
-67. **time_BodyGyro_std_Z**
-68. **time_BodyGyroJerk_std_X**
-69. **time_BodyGyroJerk_std_Y**
-70. **time_BodyGyroJerk_std_Z**
-71. **time_BodyAccMag_std**
-72. **time_GravityAccMag_std**
-73. **time_BodyAccJerkMag_std**
-74. **time_BodyGyroMag_std**
-75. **time_BodyGyroJerkMag_std**
-76. **frequency_BodyAcc_std_X**
-77. **frequency_BodyAcc_std_Y**
-78. **frequency_BodyAcc_std_Z**
-79. **frequency_BodyAccJerk_std_X**
-80. **frequency_BodyAccJerk_std_Y**
-81. **frequency_BodyAccJerk_std_Z**
-82. **frequency_BodyGyro_std_X**
-83. **frequency_BodyGyro_std_Y**
-84. **frequency_BodyGyro_std_Z**
-85. **frequency_BodyAccMag_std**
-86. **frequency_BodyAccJerkMag_std**
-87. **frequency_BodyGyroMag_std**
-88. **frequency_BodyGyroJerkMag_std**
+## General variables
+**Below are definitions that would help you understand the different variables in the data as you are working on it.**
+
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals 
+* time_Acc-XYZ
+
+* time_Gyro-XYZ 
+
+These time domain signals (prefixed with 'time_') were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. 
+
+The acceleration signal was then separated into body and gravity acceleration signals 
+* time_BodyAcc-XYZ 
+
+* time_GravityAcc-XYZ
+
+This was done using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+The body linear acceleration and angular velocity were derived in time to obtain Jerk signals (all variables with *Jerk*
+* time_BodyAccJerk-XYZ and 
+
+* time_BodyGyroJerk-XYZ
+
+Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm 
+* time_BodyAccMag 
+
+* time_GravityAccMag 
+
+* time_BodyAccJerkMag and
+
+* time_BodyGyroJerkMag 
+
+Fast Fourier Transform (FFT) was applied to some of these signals producing these variables prefixed with *frequency_*
+* frequency_BodyAcc-XYZ
+* frequency_BodyAccJerk-XYZ
+* frequency_BodyGyro-XYZ
+* frequency_BodyAccJerkMag
+* frequency_BodyGyroMag
+* frequency_BodyGyroJerkMag
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+
+* Activity: This is the activity that was recorded for each volunteer
+
+* Subject: This is an identifier for the volunteer who performed the different experiment
+
+* angle: Angle between to vectors.
+
+* meanFreq: Weighted average of the frequency components to obtain a mean frequency
+
+*_XYZ* is used to denote 3-axial signals in the X, Y and Z directions and these signals and measurements were estimated using the mean and their standard deviation.
+
+*mean* denotes a variable that was estimated using the mean() function and
+
+*std* denotes a variable that was estimated using the std() function
+
+* time_BodyodyAcc_XYZ
+* time_GravityAcc_XYZ
+* time_BodyodyAccJerk_XYZ
+* time_BodyodyGyro_XYZ
+* time_BodyodyGyroJerk_XYZ
+* time_BodyAccMag
+* time_GravityAccMag
+* time_BodyAccJerkMag
+* time_BodyGyroMag
+* time_BodyGyroJerkMag
+* frequency_BodyodyAcc_XYZ
+* frequency_BodyodyAccJerk_XYZ
+* frequency_BodyodyGyro_XYZ
+* frequency_BodyodyAccMag
+* frequency_BodyodyAccJerkMag
+* frequency_BodyodyGyroMag
+* frequency_BodyodyGyroJerkMag
+
+
+These additional vectors were obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+* gravityMean
+* time_BodyAccMean
+* time_BodyAccJerkMean
+* time_BodyGyroMean
+* time_BodyGyroJerkMean
