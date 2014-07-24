@@ -88,3 +88,12 @@ These additional vectors were obtained by averaging the signals in a signal wind
 * time_BodyAccJerkMean
 * time_BodyGyroMean
 * time_BodyGyroJerkMean
+
+
+If you want to get a full description for the data, it is available at the site where the data was obtained: 
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+and you can get the data for the project from here
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
